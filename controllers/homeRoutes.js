@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { User, Comment, Blog } = require('../models');
 const bcrypt = require('bcrypt');
+const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
 	try {
