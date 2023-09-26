@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User, Comment, Post } = require('../models');
+const { User, Comment, Blog } = require('../models');
 const bcrypt = require('bcrypt');
 
 router.get('/', async (req, res) => {
@@ -61,7 +61,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 				exclude: ['password']
 			},
 			include: [{
-				model: Post
+				model: Blog
 			}],
 		});
 
