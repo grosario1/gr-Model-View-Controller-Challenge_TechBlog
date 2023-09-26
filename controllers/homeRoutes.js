@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { User } = require("../models");
-const bcrypt = require("bcrypt");
+const { User } = require('../models');
+const bcrypt = require('bcrypt');
 
 // User signup
-router.post("/signup", async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -25,17 +25,17 @@ router.post("/signup", async (req, res) => {
 });
 
 // User login
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
     if (!userData || !(await bcrypt.compare(req.body.password, userData.password))) {
-      res.status(401).json({ message: "Invalid credentials" });
+      res.status(401).json({ message: 'Invalid credentials' });
       return;
     }
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      res.status(200).json({ user: userData, message: "You are now logged in!" });
+      res.status(200).json({ user: userData, message: 'You are now logged in!' });
     });
   } catch (err) {
     res.status(400).json(err);
@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
 });
 
 // User logout
-router.post("/logout", (req, res) => {
+router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();
