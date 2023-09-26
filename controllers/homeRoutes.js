@@ -1,56 +1,98 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../models');
+const { User, Comment, Post } = require('../models');
 const bcrypt = require('bcrypt');
 
-// User signup
-router.post('/signup', async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+router.get('/', async (req, res) => {
+	try {
+		const blogData = await Blog.findAll({
+			include: [{
+				model: User,
+				attributes: ['username'],
+			},],
+		});
 
-    const userData = await User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: hashedPassword,
-    });
+		const blogs = blogData.map((blog) => blog.get({
+			plain: true
+		}));
 
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-      res.status(200).json(userData);
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
+		res.render('homepage', {
+			blogs,
+			logged_in: req.session.logged_in
+		});
+	} catch (err) {
+		res.status(500).json(err);
+	}
 });
 
-// User login
-router.post('/login', async (req, res) => {
-  try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
-    if (!userData || !(await bcrypt.compare(req.body.password, userData.password))) {
-      res.status(401).json({ message: 'Invalid credentials' });
-      return;
-    }
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-      res.status(200).json({ user: userData, message: 'You are now logged in!' });
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
+router.get('/blog/:id', async (req, res) => {
+	try {
+		const blogData = await Blog.findByPk(req.params.id, {
+			include: [
+				{
+					model: User,
+					attributes: ['username'],
+				}, {
+					model: Comment,
+					include: [
+						User
+					]
+				}
+			],
+		});
+
+		const blog = blogData.get({
+			plain: true
+		});
+
+		res.render('blog', {
+			...blog,
+			logged_in: req.session.logged_in
+		});
+	} catch (err) {
+		res.status(500).json(err);
+	}
 });
 
-// User logout
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
+router.get('/dashboard', withAuth, async (req, res) => {
+	try {
+		const userData = await User.findByPk(req.session.user_id, {
+			attributes: {
+				exclude: ['password']
+			},
+			include: [{
+				model: Post
+			}],
+		});
+
+		const user = userData.get({
+			plain: true
+		});
+
+		res.render('dashboard', {
+			...user,
+			logged_in: true
+		});
+	} catch (err) {
+		res.status(500).json(err);
+	}
+});
+
+router.get('/login', (req, res) => {
+	if (req.session.logged_in) {
+		res.redirect('/dashboard');
+		return;
+	}
+
+	res.render('login');
+});
+
+router.get('/signUp', (req, res) => {
+	if (req.session.logged_in) {
+		res.redirect('/dashboard');
+		return;
+	}
+	res.render('signUp');
 });
 
 module.exports = router;
