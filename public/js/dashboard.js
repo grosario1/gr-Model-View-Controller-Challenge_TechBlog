@@ -26,7 +26,7 @@ document.getElementById("create-post-form").addEventListener("submit", (event) =
       const postId = this.getAttribute("data-post-id");
   
       // delete the post
-      fetch(`/api/posts/${postId}`, {
+      fetch(`/api/blogs/${blogId}`, {
         method: "DELETE",
       })
         .then(() => {
