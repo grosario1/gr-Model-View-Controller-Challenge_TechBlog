@@ -1,15 +1,15 @@
 {{#if logged_in}}
-  <h1>Welcome, {{user.username}}!</h1>
+  <h1>Welcome, {{username}}!</h1>
   <h2>Your Blog Posts</h2>
-  {{#each user.Posts}}
+  {{#each Blogs}}
     <div class="post">
       <h3>{{title}}</h3>
-      <p>{{content}}</p>
-      <a href="/post/{{id}}">Edit</a>
-      <a href="/api/posts/{{id}}" data-method="DELETE">Delete</a>
+      <p>{{description}}</p>
+      <a href="/blog/{{id}}">Edit</a>
+      <a href="/api/blogs/{{id}}" data-method="DELETE">Delete</a>
     </div>
   {{/each}}
-  <a href="/post/create">Create a New Post</a>
+  <a href="/blog/create">Create a New Post</a>
   <a href="/logout">Logout</a>
 {{else}}
   <h1>Please log in to access your dashboard</h1>
