@@ -1,4 +1,4 @@
-# gil-E_commerce_Back_End-ORM
+# gr-Model-View-Controller-Challenge_TechBlog
 ## Description
 
 Internet retail, also known as e-commerce, plays a significant role within the electronics industry, as it empowers businesses and consumers alike to conveniently engage in online buying and selling of electronic products. In the latest available data from 2021, the industry in the United States alone was estimated to have generated the substantial amount of US$2.54 trillion, according to the United Nations Conference on Trade and Development. E-commerce platforms like Shopify and WooCommerce provide a suite of services to businesses of all sizes. With that being said, this project was developed using some starter code to create a back-end app for an e-commerce type applicattion. The bases of this app uses the CLI and ORM mapping for getting data, storing data and or updating data using different types of RESTFUL api calls:
@@ -11,7 +11,7 @@ Internet retail, also known as e-commerce, plays a significant role within the e
       - DELETE
 
 ## Table of Contents
-- [gil-E\_commerce\_Back\_End-ORM](#gil-e_commerce_back_end-orm)
+- [gr-Model-View-Controller-Challenge\_TechBlog](#gr-model-view-controller-challenge_techblog)
   - [Description](#description)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
@@ -53,9 +53,6 @@ Database changed
 
 - Example of ORM app - Ecomm backend (click on Walkthrough video link):
 
-[Walkthrough video](https://drive.google.com/file/d/12wKWtG1kSlMuQ_JOUTms_EWtJNIjoUZH/view?t=6s)
-
-[![GR-ORM_Insomnia](https://github.com/grosario1/gil-E_commerce_Back_End-ORM/assets/26330325/7a7a5222-3754-4acc-83b3-c145aa5a5d77)](https://drive.google.com/file/d/12wKWtG1kSlMuQ_JOUTms_EWtJNIjoUZH/view?t=6s)
 
 
 You can find code repo [here.](https://github.com/grosario1/gil-E_commerce_Back_End-ORM)
@@ -63,7 +60,7 @@ You can find code repo [here.](https://github.com/grosario1/gil-E_commerce_Back_
 
 ## Tools & resources used:
 
-- Module 12 examples
+- Module 14 examples
 - JavaScript
 - local mySQL client - https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/
 - npm package manager - https://docs.npmjs.com/cli/v8/commands/npm-install
