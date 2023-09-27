@@ -1,0 +1,12 @@
+[
+	{
+		"blog_id": 1,
+		"comment_description": "The Uconn Web Coding Bootcamp is awesome!",
+		"user_id": 1
+	},
+    {
+		"blog_id": 2,
+		"comment_description": "Javascript is sometimes very challenging!",
+		"user_id": 2
+	}
+]

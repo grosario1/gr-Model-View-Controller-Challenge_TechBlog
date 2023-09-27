@@ -1,10 +1,11 @@
+
 document.getElementById("comment-form").addEventListener("submit", (event) => {
     event.preventDefault();
   
     const text = document.getElementById("comment-text").value.trim();
   
     //create a new comment
-    fetch(`/api/comments/${postId}`, {
+    fetch(`/api/comments/${blogId}`, {
       method: "POST",
       body: JSON.stringify({ text }),
       headers: {
