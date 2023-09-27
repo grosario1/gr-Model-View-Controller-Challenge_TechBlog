@@ -1,12 +1,12 @@
 {{#if logged_in}}
   <h1>Welcome, User!</h1>
   <!-- Render existing blog posts -->
-  {{#each posts}}
+  {{#each blogs}}
     <div class="post">
       <h2>{{title}}</h2>
       <p>Posted by: {{User.username}}</p>
-      <p>{{content}}</p>
-      <a href="/post/{{id}}">Read more</a>
+      <p>{{description}}</p>
+      <a href="/blog/{{id}}">Read more</a>
     </div>
   {{/each}}
   <a href="/dashboard">Go to Dashboard</a>
@@ -14,12 +14,12 @@
 {{else}}
   <h1>Welcome to the Blog Site</h1>
   <!-- Render existing blog posts -->
-  {{#each posts}}
+  {{#each blogs}}
     <div class="post">
       <h2>{{title}}</h2>
       <p>Posted by: {{User.username}}</p>
-      <p>{{content}}</p>
-      <a href="/post/{{id}}">Read more</a>
+      <p>{{description}}</p>
+      <a href="/blog/{{id}}">Read more</a>
     </div>
   {{/each}}
   <a href="/login">Login</a>
