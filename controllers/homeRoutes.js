@@ -5,22 +5,24 @@ const bcrypt = require('bcrypt');
 const withAuth = require('../utils/auth');
 
 
+// Route for the homepage
 router.get('/', async (req, res) => {
 	try {
 		const blogData = await Blog.findAll({
-			include: [{
-				model: User,
-				attributes: ['username'],
-			},],
+			include: [
+				{
+					model: User,
+					attributes: ['username'],
+				},
+			],
+			order: [['date_created', 'DESC']],
 		});
 
-		const blogs = blogData.map((blog) => blog.get({
-			plain: true
-		}));
+		const blogs = blogData.map((blog) => blog.get({ plain: true }));
 
 		res.render('homepage', {
 			blogs,
-			logged_in: req.session.logged_in
+			logged_in: req.session.logged_in,
 		});
 	} catch (err) {
 		res.status(500).json(err);
