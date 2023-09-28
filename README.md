@@ -51,7 +51,7 @@ Database changed
 
 - Screenschot of the MVC - Tech Blog site:
 
-  ![GilsTechBlogSite]("./../gils-tech-blog.jpg)
+![GilsTechBlogSite](./gils-tech-blog.jpg)
 
 Click on [Deployed Site]() to view site.
 
