@@ -96,28 +96,23 @@ router.get('/signup', (req, res) => {
   res.status(401).json({ message: 'User is not signed up' });
 });
 
-// Create account
+// Create account route
 router.post('/signup', async (req, res) => {
-	try {
-	  const newUser = await User.create({
-		username: req.body.username,
-		email: req.body.email,
-		password: req.body.password,
-	  });
-  
-	  req.session.save(() => {
-		req.session.user_id = newUser.id;
-		req.session.logged_in = true;
-  
-	  });
-  
-	  return res.render('homepage', {
-		stylesPath: stylesPath,
-		logged_in: req.session.logged_in
-	  });
-	} catch (error) {
-	  return res.render('homepage', { error });
-	}
-  });
+  try {
+    const newUser = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    req.session.save(() => {
+      req.session.user_id = newUser.id;
+      req.session.logged_in = true;
+      res.redirect('/dashboard');
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
   
 module.exports = router;
