@@ -20,5 +20,4 @@ async function loginFormHandler(event) {
     }
   }
 };
-
   
