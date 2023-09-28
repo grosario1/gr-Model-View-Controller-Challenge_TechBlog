@@ -4,6 +4,7 @@ const { User, Comment, Blog } = require('../models');
 const bcrypt = require('bcrypt');
 const withAuth = require('../utils/auth');
 
+
 router.get('/', async (req, res) => {
 	try {
 		const blogData = await Blog.findAll({
@@ -88,12 +89,12 @@ router.get('/login', (req, res) => {
 	res.render('login');
 });
 
-router.get('/signUp', (req, res) => {
+router.get('/signup', (req, res) => {
 	if (req.session.logged_in) {
 		res.redirect('/dashboard');
 		return;
 	}
-	res.render('signUp');
+	res.render('signup');
 });
 
 module.exports = router;

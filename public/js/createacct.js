@@ -1,4 +1,4 @@
-//Create new account
+// Create new account
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
@@ -7,18 +7,23 @@ const signupFormHandler = async (event) => {
   const password = document.querySelector('#password').value.trim();
 
   if (username && email && password) {
-    const response = await fetch('/api/signup', {
-      method: 'POST',
-      body: JSON.stringify({ username, email, password }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        body: JSON.stringify({ username, email, password }),
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-    if (response.ok) {
-      document.location.replace('/')
-    } else {
-      alert('Failed to signup');
+      if (response.ok) {
+        document.location.replace('/');
+      } else {
+        alert('Failed to signup');
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+      alert('An error occurred during signup.');
     }
   }
 };
-console.log('hello');
+
 document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
