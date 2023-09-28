@@ -1,12 +1,12 @@
 document.getElementById("logout-btn").addEventListener("click", () => {
-    fetch("/api/logout", {
-      method: "POST",
+  fetch("/api/logout", {
+    method: "POST",
+  })
+    .then(() => {
+      window.location.replace("/");
     })
-      .then(() => {
-        window.location.replace("/");
-      })
-      .catch((error) => {
-        console.error("Error logging out:", error);
-      });
-  });
+    .catch((error) => {
+      console.error("Error logging out:", error);
+    });
+});
   
