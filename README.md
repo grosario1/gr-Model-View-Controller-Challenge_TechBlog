@@ -1,9 +1,9 @@
 # gr-Model-View-Controller-Challenge_TechBlog
 ## Description
 
-Internet retail, also known as e-commerce, plays a significant role within the electronics industry, as it empowers businesses and consumers alike to conveniently engage in online buying and selling of electronic products. In the latest available data from 2021, the industry in the United States alone was estimated to have generated the substantial amount of US$2.54 trillion, according to the United Nations Conference on Trade and Development. E-commerce platforms like Shopify and WooCommerce provide a suite of services to businesses of all sizes. With that being said, this project was developed using some starter code to create a back-end app for an e-commerce type applicattion. The bases of this app uses the CLI and ORM mapping for getting data, storing data and or updating data using different types of RESTFUL api calls:
+Writing about tech can be just as important as making it. Developers spend plenty of time creating new applications and debugging existing codebases, but most developers also spend at least some of their time reading and writing about technical concepts, recent advancements, and new technologies. A simple Google search for any concept covered in this course returns thousands of think pieces and tutorials from developers of all skill levels!
 
-  Methods of HTTP calls:
+This app simulates a CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. This app follows the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication. The site makes contains route api calls using the following HTTP methods:
 
       - GET
       - POST
@@ -22,7 +22,8 @@ Internet retail, also known as e-commerce, plays a significant role within the e
 
 ## Installation 
 
-First you should clone this repo (https://github.com/grosario1/gil-E_commerce_Back_End-ORM.git). You will need to ensure you install the npm utility and express.js framework in order for you run the app. You can follow the instructions to install the utility from here: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm. Once, it is install, use the cmd to navigate to the repo you just cloned and run.... `node init -y` to initized the node js project, then install the express js package by running `npm install --save express`. You will also need to install the mysql2 framework in order to allow to code to connect to your mysql instance and database. Since you will need to connect to the database using a user name and password, it is recommended to store your credentials into a different file and call them from your code using variables. With this being said, in addtion to installing the other npm frameworks & modules, you should install `dotenv` which is a zero-dependency module that loads environment variables from a .env file into process.env. Install this module by running `npm install --save dotenv`.
+First you should clone this repo (https://github.com/grosario1/gr-Model-View-Controller-Challenge_TechBlog.git). You will need to ensure you install the npm utility and express.js framework in order for you run the app. You can follow the instructions to install the utility from here: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm. Once, it is install, use the cmd to navigate to the repo you just cloned and run.... `node init -y` to initized the node js project, then install the packages/modules required to run the app by running `npm i`. You will also need to install the mysql2 framework in order to allow to code to connect to your mysql instance and database. Since you will need to connect to the database using a user name and password, it is recommended to store your credentials into a different file and call them from your code using variables. With this being said, in addtion to installing the other npm frameworks & modules, you should install `dotenv` which is a zero-dependency module that loads environment variables from a .env file into process.env. The module gets installed  as part of execution of the `npm i` command.
+
 ## Usage
 
 
@@ -46,16 +47,13 @@ Database changed
 ```
 - **Step $5:** From directory where you cloned the repo, run `npm run seed` to seed the database with the data.
 
-- **Step #6:** From directory where you cloned the repo, run `npm run start` from the command line to start the npm app and the app will start listening in your localhost on port 3001.
+- **Step #6:** From directory where you cloned the repo, run `npm start` from the command line to start the npm app and the app will start listening in your localhost on port 3001.
 
-- **Step #7:** You can now use an api development platform tool such as Postman (https://www.postman.com) or Insomnia (https://insomnia.rest/) to test the api routes for this app. See demo below using Insomnia to test the routes:
-
-
-- Example of ORM app - Ecomm backend (click on Walkthrough video link):
+- Screenschot of the MVC - Tech Blog site:
 
 
 
-You can find code repo [here.](https://github.com/grosario1/gil-E_commerce_Back_End-ORM)
+You can find code repo [here.](https://github.com/grosario1/gr-Model-View-Controller-Challenge_TechBlog.git)
 
 
 ## Tools & resources used:
@@ -68,7 +66,7 @@ You can find code repo [here.](https://github.com/grosario1/gil-E_commerce_Back_
 - dotenv npm package - https://www.npmjs.com/package/dotenv
 
 ## Contributing
-The project is open for contributions. If you would like to contribute, create a new branch from the main and add any updates as deemed necessary. If you should find any issues with the code, please open a 'New Issue' from https://github.com/grosario1/gil-E_commerce_Back_End-ORM/issues and these request can be review and updated accordingly.
+The project is open for contributions. If you would like to contribute, create a new branch from the main and add any updates as deemed necessary. If you should find any issues with the code, please open a 'New Issue' from https://github.com/grosario1/gr-Model-View-Controller-Challenge_TechBlog/issues and these request can be review and updated accordingly.
 ## Contact Info
 For more questions, feel free to contact me:
 
