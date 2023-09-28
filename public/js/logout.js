@@ -1,5 +1,6 @@
+// Logout 
 document.getElementById("logout-btn").addEventListener("click", () => {
-  fetch("/api/logout", {
+  fetch("/api/auth/logout", {
     method: "POST",
   })
     .then(() => {
@@ -9,4 +10,3 @@ document.getElementById("logout-btn").addEventListener("click", () => {
       console.error("Error logging out:", error);
     });
 });
-  
