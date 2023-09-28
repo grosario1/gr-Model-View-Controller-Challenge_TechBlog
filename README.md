@@ -54,7 +54,7 @@ Database changed
 ![Gils-Tech-BlogSite]("./../public/assets/gils-tech-blog-site.jpg)
 
 
-Click on [Deployed Site](https://gr-mvc-tech-blog-a3196b04e1a6.herokuapp.com/) to view site.
+Click on [Deployed Site]() to view site.
 
 You can find code repo [here.](https://github.com/grosario1/gr-Model-View-Controller-Challenge_TechBlog.git)
 

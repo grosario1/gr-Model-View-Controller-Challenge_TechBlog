@@ -6,11 +6,11 @@
       <h3>{{title}}</h3>
       <p>{{description}}</p>
       <a href="/blog/{{id}}">Edit</a>
-      <a href="/api/blogs/{{id}}" data-method="DELETE">Delete</a>
+      <a href="/api/blogs/{{id}}" class="delete-post-btn" data-post-id="{{id}}" data-method="DELETE">Delete</a>
     </div>
   {{/each}}
   <a href="/blog/create">Create a New Post</a>
-  <a href="/logout">Logout</a>
+  <a href="/logout" id="logout-btn">Logout</a>
 {{else}}
   <h1>Please log in to access your dashboard</h1>
   <a href="/login">Login</a>
