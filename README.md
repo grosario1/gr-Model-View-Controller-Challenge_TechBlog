@@ -50,8 +50,9 @@ Database changed
 - **Step #6:** From directory where you cloned the repo, run `npm start` from the command line to start the npm app and the app will start listening in your localhost on port 3001.
 
 - Screenschot of the MVC - Tech Blog site:
+  ![](./gils-tech-blog.jpg) 
 
-
+Click on [Deployed Site]() to view site.
 
 You can find code repo [here.](https://github.com/grosario1/gr-Model-View-Controller-Challenge_TechBlog.git)
 
