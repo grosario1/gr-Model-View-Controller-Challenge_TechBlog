@@ -51,7 +51,8 @@ Database changed
 
 - Screenschot of the MVC - Tech Blog site:
 
-![GilsTechBlogSite](./gils-tech-blog.jpg)
+![gils-tech-blog](https://github.com/grosario1/gr-Model-View-Controller-Challenge_TechBlog/assets/26330325/bf564deb-af7d-49d3-99cc-4375ce76c0ba)
+
 
 Click on [Deployed Site]() to view site.
 
