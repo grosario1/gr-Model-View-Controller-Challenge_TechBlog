@@ -1,118 +1,64 @@
 const router = require('express').Router();
-const { User, Blog, Comment } = require('../../models');
-const withAuth = require('../../utils/auth');
+const { User } = require('../../models');
 
-
-router.get('/', async (req, res) => {
+// Create user data
+router.post('/', async (req, res) => {
   try {
-    const blogData = await Blog.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-      ],
-    });
-
-    const blogs = blogData.map((blog) => blog.get({ plain: true }));
-
-    res.json(blogs);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/blog/:id', async (req, res) => {
-  try {
-    const blogData = await Blog.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-        {
-          model: Comment,
-          include: [
-            User,
-          ],
-        },
-      ],
-    });
-
-    if (!blogData) {
-      res.status(404).json({ message: 'No Blog found with this id!' });
-      return;
-    }
-
-    const blog = blogData.get({ plain: true });
-
-    res.json(blog);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/dashboard', withAuth, async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: {
-        exclude: ['password'],
-      },
-      include: [
-        {
-          model: Blog,
-        },
-      ],
-    });
-
-    if (!userData) {
-      res.status(404).json({ message: 'No user found with this id!' });
-      return;
-    }
-
-    const user = userData.get({ plain: true });
-
-    res.json(user);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/login', (req, res) => {
-  if (req.session.logged_in) {
-    res.status(200).json({ message: 'User is already logged in' });
-    return;
-  }
-
-  res.status(401).json({ message: 'User is not logged in' });
-});
-
-router.get('/signup', (req, res) => {
-  if (req.session.logged_in) {
-    res.status(200).json({ message: 'User is already signed up' });
-    return;
-  }
-
-  res.status(401).json({ message: 'User is not signed up' });
-});
-
-// Create account route
-router.post('/signup', async (req, res) => {
-  try {
-    const newUser = await User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    });
+    const userData = await User.create(req.body);
 
     req.session.save(() => {
-      req.session.user_id = newUser.id;
+      req.session.user_id = userData.id;
       req.session.logged_in = true;
-      res.redirect('/dashboard');
+      
+      res.status(200).json(userData);
     });
-  } catch (error) {
-    res.status(500).json(error);
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
-  
+
+// User login
+router.post('/login', async (req, res) => {
+  try {
+    const userData = await User.findOne({ where: { name: req.body.name }});
+
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect name, please try again' });
+      return;
+    }
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect password, please try again' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+      
+      res.json({ user: userData, message: 'You are now logged in' });
+    });
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+// User logout
+router.post('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
 module.exports = router;
