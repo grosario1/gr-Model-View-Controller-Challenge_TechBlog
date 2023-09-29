@@ -1,3 +1,4 @@
+// Create a new blog post
 const addpostFormHandler = async (event) => {
     event.preventDefault();
   
@@ -19,4 +20,6 @@ const addpostFormHandler = async (event) => {
     }
   };
   
-  document.querySelector('#add-post').addEventListener('submit', addpostFormHandler);
+  // Add an event listener to the "Create Blog" button
+  document.querySelector('#createBlogBtn').addEventListener('click', addpostFormHandler);
+  

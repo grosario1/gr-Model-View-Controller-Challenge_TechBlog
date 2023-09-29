@@ -9,7 +9,7 @@ const editpostFormHandler = async (event) => {
   if (title && content) {
     const response = await fetch(`/api/post/${id}`, {
       method: 'PUT',
-      body: JSON.stringify({ title, content }),
+      body: JSON.stringify({ title, description }),
       headers: { 'Content-Type': 'application/json' },
     });
 
