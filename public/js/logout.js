@@ -1,12 +1,15 @@
 // Logout 
-document.getElementById("logout-btn").addEventListener("click", () => {
-  fetch("/api/auth/logout", {
-    method: "POST",
-  })
-    .then(() => {
-      window.location.replace("/");
-    })
-    .catch((error) => {
-      console.error("Error logging out:", error);
-    });
-});
+const logoutHandler = async () => {
+  const response = await fetch('/api/user/logout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (response.ok) {
+    document.location.replace('/');
+  } else {
+    alert('Failed to logout');
+  }
+};
+
+document.querySelector('#logout').addEventListener('click', logoutHandler);

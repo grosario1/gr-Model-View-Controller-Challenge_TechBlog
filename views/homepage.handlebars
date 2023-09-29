@@ -2,14 +2,18 @@
 {{#if logged_in}}
   <h1>Welcome, User!</h1>
   <!-- Render existing blog posts -->
-  {{#each blogs}}
-    <div class="post">
-      <h2>{{title}}</h2>
-      <p>Posted by: {{user.username}}</p>
-      <p>{{description}}</p>
-      <a href="/blog/{{id}}">Read more</a>
+ {{#each blogs}}
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title">{{title}}</h2>
+      <p class="card-text">Posted by: {{user.username}}</p>
+      <p class="card-text">{{description}}</p>
+      {{#if logged_in}}
+        <a href="/blog/{{id}}" class="btn btn-primary">Read more</a>
+      {{/if}}
     </div>
-  {{/each}}
+  </div>
+{{/each}}
   <a href="/dashboard">Go to Dashboard</a>
   <a href="/logout">Logout</a>
 {{else}}

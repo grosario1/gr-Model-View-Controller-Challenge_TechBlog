@@ -1,13 +1,12 @@
 {{#if logged_in}}
   <h1>Welcome, {{username}}!</h1>
   <h2>Your Blog Posts</h2>
-  {{#each blogs}}
+  {{#each Blogs}}
     <div class="post">
       <h3>{{title}}</h3>
       <p>{{description}}</p>
-      <p>Date Created: {{format_date date_created}}</p>
       <a href="/blog/{{id}}">Edit</a>
-      <a href="#" class="delete-post-btn" data-post-id="{{id}}">Delete</a>
+      <a href="/api/blogs/{{id}}" data-method="DELETE">Delete</a>
     </div>
   {{/each}}
   <a href="/blog/create">Create a New Post</a>
