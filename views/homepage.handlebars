@@ -1,33 +1,17 @@
-<div class="center-text">
-{{#if logged_in}}
-  <h1>Welcome, User!</h1>
-  <!-- Render existing blog posts -->
- {{#each blogs}}
-  <div class="card mb-4">
-    <div class="card-body">
-      <h2 class="card-title">{{title}}</h2>
-      <p class="card-text">Posted by: {{user.username}}</p>
-      <p class="card-text">{{description}}</p>
-      {{#if logged_in}}
-        <a href="/blog/{{id}}" class="btn btn-primary">Read more</a>
-      {{/if}}
-    </div>
+{{#if posts.length}}
+{{#each posts as |post|}}
+<div class="card mt-3">
+  <div class="card-header bg-dark text-light">
+    {{title}}
+    <span class="float-right">
+      Posted by {{user.name}} on {{format_date date_created}}
+    </span>
   </div>
-{{/each}}
-  <a href="/dashboard">Go to Dashboard</a>
-  <a href="/logout">Logout</a>
-{{else}}
-  <h1>Welcome to the Blog Site</h1>
-  <!-- Render existing blog posts -->
-  {{#each blogs}}
-    <div class="post">
-      <h2>{{title}}</h2>
-      <p>Posted by: {{user.username}}</p>
-      <p>{{description}}</p>
-      <a href="/blog/{{id}}">Read more</a>
-    </div>
-  {{/each}}
-  <a href="/login">Login</a>
-  <a href="/signup">Sign Up</a>
-{{/if}}
+  <div class="card-body border border-dark">
+    <a href="/post/{{id}}" class="text-dark">
+    {{content}}
+     </a>
+  </div>
 </div>
+{{/each}}
+{{/if}}
