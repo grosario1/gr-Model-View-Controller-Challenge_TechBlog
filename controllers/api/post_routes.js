@@ -1,72 +1,68 @@
 const router = require('express').Router();
-const { Comment } = require('../../models');
+const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.get('/', (req, res) => {
-    Comment.findAll({})
-        .then(commentData => res.json(commentData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err)
-        });
+// Create post
+router.post('/', withAuth, async (req, res) => {
+  try {
+    const newPost = await Post.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+
+    res.status(200).json(newPost);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
-router.get('/:id', (req, res) => {
-    Comment.findAll({
+// Edit post
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const updatePost = await Post.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
+      },
+      {
         where: {
-            id: req.params.id
-        }
-    })
-        .then(commentData => res.json(commentData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        })
+          id: req.params.id,
+        },
+      }
+    );
+
+    if (!updatePost) {
+      res
+        .status(400)
+        .json({ message: 'No post found with this id'});
+        return;
+    }
+
+    res.status(200).json(updatePost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// router.post('/', async (req, res) => {
-//     try {
-//         const newComment = await Comment.create({
-//             ...req.body,
-//             user_id: req.session.user_id,
-//         });
-//         res.json(newComment);
-//     } catch (err) {
-//         res.status(500).json(err);
-//     }
-// });
-
-// Create a new comment
-router.post("/", withAuth, async (req, res) => {
-    try {
-      const newComment = await Comment.create({
-        comment_description: req.body.comment_description,
-        user_id: req.session.user_id,
-        blog_id: req.body.blog_id,
-      });
-  
-      res.status(200).json(newComment);
-    } catch (err) {
-      res.status(400).json(err);
-    }
-  });
-
+// Delete post
 router.delete('/:id', withAuth, async (req, res) => {
-    try {
-        const commentData = await Comment.destroy({
-            where: {
-                id: req.params.id,
-                user_id: req.session.user_id,
-            },
-        });
-        if (!commentData) {
-            res.status(404).json({ message: 'No Comment found with this id!' });
-            return;
-        }
-        res.status(200).json(commentData);
-    } catch (err) {
-        res.status(500).json(err);
+  try {
+    const deletePost = await Post.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+
+    if (!deletePost) {
+      res.status(404).json({ message: 'No post found with this id'});
+      return;
     }
+
+    res.status(200).json(deletePost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
