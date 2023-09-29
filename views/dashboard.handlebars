@@ -1,18 +1,24 @@
-{{#if logged_in}}
-  <h1>Welcome, {{username}}!</h1>
-  <h2>Your Blog Posts</h2>
-  {{#each Blogs}}
-    <div class="post">
-      <h3>{{title}}</h3>
-      <p>{{description}}</p>
-      <a href="/blog/{{id}}">Edit</a>
-      <a href="/api/blogs/{{id}}" data-method="DELETE">Delete</a>
-    </div>
+<div class="container p-0">
+  {{#if posts.length}}
+  {{#each posts as |post|}}
+  <div class="post mb-3 mt-3 bg-secondary rounded">
+    <a href="/dashboard/edit/{{id}}" class="text-light text-decoration-none">
+      <input type="hidden" name="post-id" value="{{post.id}}">
+      <div>
+        <div class="row">
+          <div class="col-8">
+            <h4>{{title}}</h4>
+          </div>
+          <div class="col-4 text-right">
+            <span>{{format_date date_created}}</span>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
   {{/each}}
-  <a href="/blog/create">Create a New Post</a>
-  <a href="/logout">Logout</a>
-{{else}}
-  <h1>Please log in to access your dashboard</h1>
-  <a href="/login">Login</a>
-  <a href="/signup">Sign Up</a>
-{{/if}}
+  {{/if}}
+</div>
+<div class="text-center">
+  <button type="button" class="newPostBtn"><a href="/dashboard"><i class="bi bi-plus"></i> New Post</a></button>
+</div>
