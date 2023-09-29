@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
 
-// Route for the homepage
+// Route for the homepagepage
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('home', {
+    res.render('homepage', {
       posts,
       logged_in: req.session.logged_in
     });
