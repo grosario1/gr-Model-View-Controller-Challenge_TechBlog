@@ -1,28 +1,74 @@
-const router = require("express").Router();
-const { Comment } = require("../../models");
-const withAuth = require("../../utils/auth");
+const router = require('express').Router();
+const { Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-// Create a new comment
-router.post("/", withAuth, async (req, res) => {
+// Create comment
+router.post('/', withAuth, async (req, res) => {
   try {
-    if (!req.body.comment_description || !req.body.blog_id) {
-      return res.status(400).json({ message: "Comment description and blog ID are required" });
-    }
-
-    // Create a new comment with the user's ID and the provided data
     const newComment = await Comment.create({
-      comment_description: req.body.comment_description,
+      ...req.body,
       user_id: req.session.user_id,
-      blog_id: req.body.blog_id,
     });
 
-    // Return the newly created comment
-    res.status(201).json(newComment);
+    res.status(200).json(newComment);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to create a comment" });
+    res.status(500).json(err);
+  }
+});
+
+// Get all comments
+router.get('/', async (req, res) =>{
+  try {
+    const allComents = await Comment.findAll({});
+
+    res.status(200).json(allComents);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Get all comments from one post
+router.get('/:id', withAuth, async (req, res) => {
+  try {
+    const getComment = await Comment.findAll(
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    if (!getComment[0]) {
+      res
+        .status(400)
+        .json({ message: 'No comment found with this id'});
+        return;
+    }
+
+    res.status(200).json(getComment);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Delete comment
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    const deleteComment = await Comment.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!deleteComment) {
+      res.status(404).json({ message: 'No comment found with this id'});
+      return;
+    }
+
+    res.status(200).json(deleteComment);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
 module.exports = router;
-
