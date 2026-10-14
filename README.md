@@ -1,3 +1,5 @@
+MVC Sample project
+
 # gr-Model-View-Controller-Challenge_TechBlog
 ## Description
 
